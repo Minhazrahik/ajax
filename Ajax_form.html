@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>AJAX SUBMISSION FORM</title>
+    
+    <script>
+    function Validation() {
+        var firstname = document.forms["Register Form"]["firstname"];
+        var lastname = document.forms["Register Form"]["lastname"];
+        var gender = document.forms["Register Form"]["gender"];
+        var dob = document.forms["Register Form"]["dob"];
+        var religion = document.forms["Register Form"]["religion"];
+        var email = document.forms["Register Form"]["email"];
+        var username = document.forms["Register Form"]["uname"];
+        var password = document.forms["Register Form"]["password"];
+
+  
+        if (firstname.value == "") {
+            window.alert("Please enter your first name.");
+            name.focus();
+            return false;
+        }
+
+        if (lastname.value == "") {
+            window.alert("Please enter your last name.");
+            name.focus();
+            return false;
+        }
+
+        if (gender.value == "") {
+            window.alert("Please select your gender.");
+            name.focus();
+            return false;
+        }
+  
+        if (dob.value == "") {
+            window.alert("Please select your date of birth.");
+            address.focus();
+            return false;
+        }
+  
+        if (religion.value == "") {
+            window.alert("Please select your religion.");
+            email.focus();
+            return false;
+        }
+  
+        if (email.value == "") {
+            window.alert("Please enter your email id.");
+            phone.focus();
+            return false;
+        }
+
+        if (uname.value == "") {
+            window.alert("Please enter your username.");
+            name.focus();
+            return false;
+        }
+  
+        if (password.value == "") {
+            window.alert("Please enter your password");
+            password.focus();
+            return false;
+        }
+
+        return true;
+    }
+</script>
+    <style>
+       
+        form {
+            text-align: left;
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        legend {
+            margin: 0 auto;
+            color: teal;
+        }
+
+        input {
+            margin: 5px 0;
+
+        }
+
+        p {
+            text-align: center;
+        }
+
+        button {
+            background-color: teal;
+            color: white;
+            padding: 5px 10px;
+            margin: 15px 0;
+        }
+
+        h1 {
+            color: teal;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <form action="" method="POST">
+            <h2><legend>1. Basic Information:</legend></h2>
+
+            <label>First Name</label><br>
+            <input type="text" name="firstname" required><br>
+            
+            <label>Last Name</label><br>
+            <input type="text" name="lastname" required><br>
+            
+            <label>Gender</label><br>
+            <input type="radio" name="gender" value="male" required>
+            <label for="male">Male</label><br>
+            <input type="radio" name="gender" value="female" required>
+            <label for="female">Female</label><br><br>
+
+            <label>Date of Birth</label><br>
+            <input type="date" name="dob" required><br><br>
+
+            <label for="religion">Religion</label><br>
+            <select name="religion" required>
+                <option value="Islam">Islam</option>
+                <option value="Hinduism">Hinduism</option>
+                <option value="Christianity">Christianity</option>
+                <option value="Buddhism">Buddhism</option>
+            </select>
+            <br><br>
+
+            <h2><legend>2. Contact Information:</legend></h2>
+
+            <label>Present Address</label><br>
+            <input type="textarea" name="presentaddress"><br>
+
+            <label>Permanent Address</label><br>
+            <input type="textarea" name="permanentaddress"><br>
+            
+            <label>Phone</label><br>
+            <input type="tel" name="phone"><br>
+
+            <label>E-mail</label><br>
+            <input type="email" name="email" required><br>
+
+            <label>Personal Website Link</label><br>
+            <input type="url" name="weblink"><br>
+
+            <h2><legend>3. Account Information:</legend></h2>
+
+            <label>Username</label><br>
+            <input type="text" name="uname" required><br>
+
+            <label>Password</label><br>
+            <input type="password" name="password" required><br>
+
+
+            <button id="submit" onclick="submit()">Submit</button>
+
+            <p id="p1"></p>
+
+            <br>
+
+
+            <label> Id: </label>
+            <input type="number" name="search" id="search">
+
+            <button id="search" onclick="search()">Search</button>
+
+            <p id="p2"></p>
+
+    <script>
+        
+        function submit() {
+
+
+            var firstname = document.getElementById("firstname").value;
+            var lastname = document.getElementById("lastname").value;
+            var gender = document.getElementById("gender").value;
+            var DoB = document.getElementById("dob").value;
+            var religion = document.getElementById("religion").value;
+            var email = document.getElementById("email").value;
+            var username = document.getElementById("uname").value;
+            var password = document.getElementById("password").value;
+
+
+             if(firstname == "" || lastname == "") {
+                document.getElementById("p1").innerHTML = "Please insert informations";
+                document.getElementById("p1").style.color = "teal";
+            }
+            else {
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if(this.readyState == 4 && this.status == 200) {
+                        document.getElementById("p1").innerHTML = xhttp.responseText;
+                        document.getElementById("p1").style.color = "green";
+                    }
+                }
+
+                xhttp.open("POST", "AjaxAction.php", true);
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhttp.send("firstname="+lastname+"&firstname");
+            }
+             
+
+            if(uname == "" || password == "") {
+                document.getElementById("p1").innerHTML = "Please insert informations";
+                document.getElementById("p1").style.color = "teal";
+            }
+
+            else {
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if(this.readyState == 4 && this.status == 200) {
+                        document.getElementById("p1").innerHTML = xhttp.responseText;
+                        document.getElementById("p1").style.color = "green";
+                    }
+                }
+
+                xhttp.open("POST", "AjaxAction.php", true);
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhttp.send("uname="+uname+"&password="+password);
+            }
+        }
+
+        function search() {
+            var search = document.getElementById("search").value;
+
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if(this.readyState == 4 && this.status == 200) {
+                    document.getElementById("p2").innerHTML = xhttp.responseText;
+                }
+            }
+
+            xhttp.open("GET", "AjaxAction.php?searchKey=" + searchKey, true);
+            xhttp.send();
+        }
+
+    </script>
+</body>
+</html>
